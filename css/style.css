@@ -1,0 +1,216 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e0f7fa;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.character-selection {
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.character {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    background-color: lightgray;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.character.blue {
+    background-color: lightblue;
+}
+
+.character.pink {
+    background-color: lightpink;
+}
+
+.character.active {
+    transform: scale(1.1);
+    border: 3px solid gold;
+}
+
+.character.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: lightgray;
+    border: 2px solid black;
+    transition: background-color 0.3s;
+}
+
+.cell.active {
+    background-color: #129c40;
+    border: 2px solid #0ec40e;
+}
+
+button:disabled {
+    background-color: grey;
+}
+
+/* 주사위 스타일 */
+#diceContainer {
+    perspective: 1000px;
+    margin-top: 20px;
+}
+
+#dice {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;  /* 주사위 3D 효과 유지 */
+    transform: rotateX(120deg) rotateY(40deg);  /* 초기 상태에서 모든 면이 보이지 않도록 설정 */
+    transition: transform 1s ease;  /* 회전 속도 */
+    transform-style: preserve-3d;
+    animation-fill-mode: forwards;
+}
+/* 부드럽게 굴러가는 애니메이션 */
+@keyframes rollAnimation {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(70deg) rotateY(480deg); } /* 부드럽게 멈춤 */
+}
+
+.roll {
+    animation: rollAnimation 2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;  /* 뒷면이 보이지 않도록 설정 */
+}
+
+/* 주사위 면의 위치 설정 */
+.face-1 { transform: rotateY(0deg) translateZ(50px); }
+.face-2 { transform: rotateY(90deg) translateZ(50px); }
+.face-3 { transform: rotateY(180deg) translateZ(50px); }
+.face-4 { transform: rotateY(-90deg) translateZ(50px); }
+.face-5 { transform: rotateX(90deg) translateZ(50px); }
+.face-6 { transform: rotateX(-90deg) translateZ(50px); }
+
+.dot {
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.top-left {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.top-right {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+.middle-left {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+}
+
+.middle-right {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+}
+
+
+/* 문제 영역 */
+/* 모달 배경 색상을 연하게 설정하고 위치를 우측으로 조정 */
+#questionModal {
+    display: none;
+    position: absolute;
+    right: 20px; /* 우측에서 20px 떨어지게 설정 */
+    top: 50px; /* 상단에서 50px 떨어지게 설정 */
+    width: 300px; /* 문제 모달의 너비 */
+    background-color: rgba(255, 255, 255, 0.8); /* 연한 배경색 (투명도 0.8) */
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 */
+    z-index: 100; /* 다른 요소 위에 나타나도록 설정 */
+}
+
+.modal-content {
+    background-color: transparent; /* 모달 내부 배경을 투명하게 설정 */
+    padding: 0;
+    border-radius: 10px;
+}
+
+#questionText {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+#questionModal button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50; /* 버튼 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#questionModal button:hover {
+    background-color: #45a049; /* 버튼 호버 시 색상 변경 */
+}
+

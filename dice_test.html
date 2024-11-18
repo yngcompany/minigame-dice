@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주사위 게임</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="character-selection">
+            <div class="character blue" id="blueCharacter" onclick="selectPlayer('blue')">파란 캐릭터</div>
+            <div class="character pink" id="pinkCharacter" onclick="selectPlayer('pink')">분홍 캐릭터</div>
+        </div>
+        <div class="game-board" id="gameBoard"></div>
+        <div class="controls">
+            <p>첫 번째 주사위: <span id="firstDiceValue">-</span></p>
+            <p>두 번째 주사위: <span id="secondDiceValue">-</span></p>
+            <button id="rollDiceBtn" disabled onclick="rollDice()">주사위 굴리기</button>
+        </div>
+        <div id="scoreboard">
+            <p>파란팀 점수: <span id="blueScore">0</span></p>
+            <p>분홍팀 점수: <span id="pinkScore">0</span></p>
+        </div>
+        <div id="diceContainer">
+            <div id="dice" class="show-1">
+                <div class="face face-1">
+                    <div class="dot center"></div>
+                </div>
+                <div class="face face-2">
+                    <div class="dot top-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face face-3">
+                    <div class="dot top-left"></div>
+                    <div class="dot center"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face face-4">
+                    <div class="dot top-left"></div>
+                    <div class="dot top-right"></div>
+                    <div class="dot bottom-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face face-5">
+                    <div class="dot top-left"></div>
+                    <div class="dot top-right"></div>
+                    <div class="dot center"></div>
+                    <div class="dot bottom-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face face-6">
+                    <div class="dot top-left"></div>
+                    <div class="dot top-right"></div>
+                    <div class="dot middle-left"></div>
+                    <div class="dot middle-right"></div>
+                    <div class="dot bottom-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <p id="questionText">문제가 여기에 표시됩니다.</p>
+            <button onclick="submitAnswer(true)">O</button>
+            <button onclick="submitAnswer(false)">X</button>
+        </div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
